@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        /* background-image: linear-gradient(to right,rgb(241, 219, 51),rgb(58, 169, 234)); */
+    }
+</style>
+<body class="bg-none md:bg-yellow-400">
+    <form action="/login/check_admin_login" method="post">
+    <div class="grid place-items-center"> 
+        <div class="w-[500px] h-[650px] text-center place-items-center  mt-12 rounded-xl" style="background-color: rgba(18, 19, 14, 0.4);border: 3px; border-color: beige;">
+            <div class="text-white text-2xl font-bold mt-10 ">Admin</div>
+            <div class="grid place-items-center"><img src="/images/60111.jpg" width="150px" class="rounded-full"></div><br><br>
+
+            <div class=" justify-items-center"><i class="material-icons text-white text-4xl ">mail_outline</i><input type="text" placeholder="Email id/Mobile no." id="email" name="email" class="w-80 rounded-3xl bg-[rgba(18,19,14,0.2)] placeholder:text-white"></div><br>
+
+            <div><i class="material-icons text-white text-4xl ">lock_outline</i>
+                <input type="password" placeholder="password" id="password" name="password" class="w-96 h-16 md:w-80 md:h-auto rounded-3xl bg-[rgba(18,19,14,0.2)] placeholder:text-white">
+            </div>
+            <br>
+
+            <div><button type="submit" class="w-40 h-10 rounded-xl bg-blue-500 text-xl text-white border-zinc-200 border-2 hover:">Login</button></div>
+
+        </div>
+        <%if(status){%>
+            <span><b><font color="red"><%=massage%></font></b></span>
+        <%}%>
+
+    </div>
+</form>
+</body> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script>
+    $(document).ready(function(){
+        
+    });
+</script>
+</html>

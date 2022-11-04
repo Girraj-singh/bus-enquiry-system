@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://kit.fontawesome.com/c08ddbd238.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="/javascripts/project.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>bus_list</title>
+</head>
+
+<body style="background: linear-gradient(to right,rgb(241, 219, 51),rgb(58, 169, 234));">
+    <div class="grid place-content-center justify-items-center lg:mt-10">
+        <% if(status==false){%>
+            <h2>
+                <%=error%>
+            </h2>
+            <%} else {%>
+                <table class="w3-table-all w3-mobile border-x-0 border-y-4">
+                    <caption class="bg-blue-400 text-2xl font-bold text-white p-3">
+                        <font align="left">list Of Bus Data</font>
+                    </caption>
+                    <thead>
+                        <tr class="w3-light-grey ">
+                            <th>Bus Id</th>
+                            <th>Bus Modal</th>
+                            <th>Bus No.</th>
+                            <th>Source</th>
+                            <th>Destination</th>
+                            <th>Distance</th>
+                            <th>Day's</th>
+                            <th>&#8377;Rent</th>
+                            <th>Picture</th>
+                            <th>View/Edit</th>
+                        </tr>
+                    </thead>
+                    <% data.map((item)=>{%>
+                        <tr
+                            class="justify-items-center hover:scale-x-105 scale-y-[1] border-2 border-y-emerald-700 w3-hover-blue">
+                            <td>
+                                <%=item.busid%>
+                            </td>
+                            <td>
+                                <%=item.modalname%>
+                            </td>
+                            <td>
+                                <%=item.busnumber%>
+                            </td>
+                            <td>
+                                <%=item.sourcestate%><br>
+                                    <%=item.sourcecity%>
+                            </td>
+                            <td>
+                                <%=item.destinationstate%><br>
+                                    <%=item.destinationcity%>
+                            </td>
+                            <td>
+                                <%=item.kilometer%>
+                            </td>
+                            <td>
+                                <%=item.day%>
+                            </td>
+                            <td>
+                                <%=JSON.parse(item.rent)%>
+                            </td>
+                            <td>
+                                <button class="btnimage" bus_info="<%=JSON.stringify(item)%>">
+                                    <img src='/images/<%=item.picture%>' width="60" class="rounded-xl hover:scale-105]">
+                                </button>
+                            </td>
+                            <td>
+                                <div
+                                    class="mt-5 h-8 w-28 justify-items-center text-center bg-gray-400 rounded-xl border-4 border-green-500 hover:bg-gray-700">
+                                    <button class="btnedit" bus_info="<%=JSON.stringify(item)%>">Edit/View</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <%});%>
+
+                </table>
+                <%}%>
+    </div>
+
+    <!-- POPUP BOX -->
+    <div class="popupbox" id="popup">
+        <button id="btnclose" class="right-10 text-black ml-[97%] bg-cyan-100 scale-110 rounded-xl">
+            <i class="large material-icons">close</i></button>
+        <!-- <p id="id01"></p> -->
+        <!-- <form action="/bus/submited" method="post" enctype="multipart/form-data"> -->
+        <div>
+            <div class="h-auto w-auto mx-5  rounded-xl flex-row shadow-2xl " style="background: #fff;">
+                <div
+                    class="w-[100%] h-[16%] bg-emerald-600 rounded-xl pt-4 pb-4 font-bold text-2xl text-rose-50 opacity-75">
+                    Bus Enquiry System
+                </div>
+                <!-- bus type -->
+                <div class="p-[2%] row-1 ">
+                    <i class="material-icons scale-[1.5] m-6  text-green-500">directions_bus</i>
+                    <select name="bustype" id="bustype"
+                        class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                        <option value="">Choose Bus</option>
+                    </select>
+
+                </div>
+
+                <!-- Source -->
+                <div class="grid grid-cols-3 justify-items-stretch items-center pr-10">
+                    <div class="text-2xl pl-11">
+                        <font><b>Source></b></font>
+                    </div>
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">public</i>
+                        <select name="sstate" id="sstate"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select state</option>
+                        </select>
+                    </div>
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">location_city</i>
+                        <select name="scity" id="scity"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select city</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Destination -->
+                <div class="grid grid-cols-3 justify-items-stretch items-center pr-10 ">
+                    <div class="text-2xl pl-11">
+                        <font><b>Destination></b></font>
+                    </div>
+                    <div class="">
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">public</i>
+                        <select name="dstate" id="dstate"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select state</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">location_city</i>
+                        <select name="dcity" id="dcity"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select city</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Kilometer/rent -->
+                <div class="grid grid-cols-2 justify-items-stretch gap-5">
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">place</i>
+                        <input type="text" name="kilometer" id="kilometer" placeholder="Kilometer"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                    </div>
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">payment</i>
+                        <input type="text" name="rent" id="rent" placeholder="Rent"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                    </div>
+                </div>
+
+                <input type="hidden" id="busid">
+                <!-- Day -->
+                <div class=" flex justify-center m-5">
+                    <div>
+                        <i class="material-icons scale-[1.5] mr-4  text-blue-500">today</i>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" name="day" id="Sun." value="Sun.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Sun.">Sun.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" id="Mon." name="day" value="Mon.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Mon.">Mon.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" id="Tus." name="day" value="Tue.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Tus.">Tue.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" id="Wed." name="day" value="Wed.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Wed.">Wed.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" id="Thu." name="day" value="Thu.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Thu.">Thu.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" id="Fri." name="day" value="Fri." >
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Fri.">Fri.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer day"
+                            type="checkbox" id="Sat." name="day" value="Sat.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="Sat.">Sat.</label>
+                    </div>
+
+                </div>
+
+                <!-- Busno. / Picture  -->
+                <div class="grid grid-cols-1 justify-items-stretch items-center gap-3 ">
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">local_play</i>
+                        <input type="text" name="busnumber" id="busnumber" placeholder="Bus No."
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                    </div>
+                    
+                </div>
+
+                <!-- Submit button -->
+                <div class="grid grid-cols-2 justify-items-center gap-10 my-8 ">
+                    <div class="text-center text-white">
+                        <button class="h-10 w-40 text-xl pb-2 font-bold bg-green-600 rounded-2xl border-2 border-green-700  hover:scale-105" id="sbdbtn">Save<i
+                                class="material-icons scale-[1] ml-5 text-2xl text-white">send</i></button>
+                    </div>
+                    <div class="text-center text-white">
+                        <button class="h-10 w-40 text-xl font-bold bg-green-600 rounded-2xl border-2 border-green-700  hover:scale-105" id="dbdbtn">Delete</button>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- </form> -->
+    </div>
+
+
+
+    <!-- ///////// IMAGE Diloge Start /////////////////////-->
+    <div id="imagepopup"
+        style="display: none;height: auto;width: 55%;border: 2px solid black;box-shadow: 0px 0px 10px black;position: absolute;left: 21%;top: 10%;background: rgba(252, 252, 252, 0.7);border-radius: 10px; position: fixed;">
+        <header
+            class="bg-green-500 text-3xl font-bold text-white text-center justify-items-center h-10 w-full rounded-lg">
+            Edit Product Picture</header>
+        <span id="closebtn" style="cursor:pointer;position:absolute;left:93%;top: 1%;">
+            <font color="blue"><b>close</b></font>
+        </span>
+        <div id="bus_name" class="font-bold text-2xl font-serif text-center">girraj singh</div><br>
+      <div class="relative left-[38%]">
+        <img  width="200" class="rounded-xl hover:scale-105 shadow-2xl cursor-pointer edit_image" id="edit_image">
+      </div>
+      <br>
+      <div class="grid grid-cols-2 justify-items-stretch items-center gap-3 mb-6 ml-32">
+        <div class="justify-center items-center text-center">
+            <input type="file" id="select_photo" value="Select Image" width="100px">
+        </div>
+        <div>
+            <button class="text-center text-white font-bold bg-green-400 h-10 w-40 rounded-xl hover:border-4 border-slate-600" id="save_photo">Save</button>
+        </div>
+
+      </div>
+      <!-- <input type="hidden" id="busid"> -->
+
+    </div>
+    <!-- ////////  IMAGE Diloge End -->
+
+<!-- //////////// ZOOM IMAGE -->
+    <div class="h-full w-full bg-[#76caefb3] hidden absolute top-0" id="zoom">
+        <button id="zoom_close" class="right-10 text-black ml-[97%] cursor-pointer">
+            <i class="large material-icons text-3xl scale-[2]">close</i></button>
+            <div class="justify-items-center ml-[370px] mt-10">
+                <img class="edit_image rounded-lg" width="750px">
+            </div>
+
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $('.btnedit').click(function () {
+            $('#popup').fadeIn("slow");
+            var item = JSON.parse($(this).attr('bus_info'));
+            // alert(item.modalname);
+            $('#busnumber').val(item.busnumber);
+            $('#kilometer').val(item.kilometer);
+            $('#rent').val(item.rent)
+            $('#busid').val(item.busid);
+            alert(item.busnumber);
+            $('#bustype').val(item.bustype);
+            $('#sstate').val(item.sstate);
+            $('#dstate').val(item.dstate);
+            
+                
+            //////////////////FILL CHECKED BOX////////////////////
+            var days = JSON.parse(item.day);
+            // alert(days);
+            var week = ['Sun.','Mon.','Tue.','Wed.','Thu.','Fri.','Sat.'];
+            week.map((items)=>{
+                if(days.includes(items)){
+                    var arr = document.getElementsByTagName("input");
+                    for (var i in arr) {
+                        if (arr[i].id == items)
+                        { arr[i].checked = true;}
+                    }
+                    // alert("true");
+                }
+            });
+            ///////////////////////////////////////////////////////
+
+            $.getJSON(`http://localhost:3000/bus/fetch_all_cities`, { stateid: item.sstate }, function (data) {
+                $("#scity").empty();
+                $("#scity").append($("<option>").text("choose city"));
+                //  alert(JSON.stringify(data))
+
+                data.city.map((item) => { $("#scity").append($("<option>").text(item.cityname).val(item.cityid)) });
+                $('#scity').val(item.scity)
+
+            });
+
+            $.getJSON(`http://localhost:3000/bus/fetch_all_cities`, { stateid: item.dstate }, function (data) {
+                $("#dcity").empty();
+                $("#dcity").append($("<option>").text("choose city"));
+                //  alert(JSON.stringify(data))
+
+                data.city.map((item) => { $("#dcity").append($("<option>").text(item.cityname).val(item.cityid)) });
+                $('#dcity').val(item.dcity);
+
+            });
+
+
+
+
+
+            M.updateTextFields();
+        });
+
+        //HODE POPUP
+        $('#btnclose').click(function () {
+            $('#popup').hide();
+        });
+
+        $('#sbdbtn').click(function () {
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire('Saved!', '', 'success')
+
+                var newdays=[]
+            $('.day').map(function(){
+                 if($(this).prop('checked'))
+                {
+                   newdays.push($(this).val())
+                }
+            });
+
+            // alert(JSON.stringify(newdays));
+            $.getJSON('/bus/savebusdata', {
+                bustype: $('#bustype').val(),
+                sstate: $('#sstate').val(),
+                scity: $('#scity').val(),
+                dstate: $('#dstate').val(),
+                dcity: $('#dcity').val(),
+                kilometer: $('#kilometer').val(),
+                rent: $('#rent').val(),
+                busid: $('#busid').val(),
+                day:newdays,
+                // day:$('.day').val(),
+
+            }, function (data) {
+                // alert(data.massage);
+                window.location.reload('/bus/display_all_data');
+            })
+
+            } else if (result.isDenied) {
+              Swal.fire('Changes are not saved', '', 'info')
+              window.location.reload('/bus/display_all_data');
+             }
+            });
+           
+        });
+
+        $('#dbdbtn').click(function () {
+            $.getJSON('/bus/deletebusdata', { busid: $('#busid').val(), }, function (data) {
+                alert(data.massage);
+                window.location.reload('/bus/display_all_data')
+            })
+        })
+
+
+        // ////////EDIT PICTURE//////////////
+        $('.btnimage').click(function () {
+            $('#imagepopup').show();
+            var item = JSON.parse($(this).attr('bus_info'));
+            $('#busid').val(item.busid);
+            $('#bus_name').html(item.modalname);
+            $('.edit_image').attr('src',`/images/${item.picture}`);
+            
+        });
+        $('#closebtn').click(function(){
+            $('#imagepopup').hide();
+        });
+
+        $('#save_photo').click(function(){
+            // alert('save button')
+           var fromData = new FormData(); 
+           fromData.append("busid",$('#busid').val());
+           var files =$('#select_photo')[0].files;
+           if(files.length>0){
+             fromData.append("picture",files[0]);
+             //////////////ajax////////////
+             $.ajax({
+                    url:'http://localhost:3000/bus/uplode_picture',
+                    type:'POST',
+                    data:fromData,
+                    contentType:false,
+                    processData:false,
+                    success:function(response){
+                        Swal.fire('Saved!', response.status, 'success')
+                        window.location.reload('/bus/display_all_data');
+                        // alert(response.status);
+                    }
+
+             });
+           }else{
+            // alert('Please select a file.');
+            Swal.fire(
+                'IMAGE ?',
+                'Please Select A Image',
+                'question'
+            )
+           }
+        });
+
+        ///////////////ZOOM PICTURE/////////////
+        $('#edit_image').click(function(){
+            $('#zoom').slideDown("slow");
+        });
+        $('#zoom_close').click(function(){
+            $('#zoom').hide();
+        });
+
+    });
+</script>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="/javascripts/project.js"></script>
+
+    <script defer>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+    </script>
+
+    <script src="https://kit.fontawesome.com/c08ddbd238.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+
+<body background="">
+    <!-- <header>
+        <div class="h-20 w-[100%] bg-sky-300">
+        </div>
+    </header> -->
+
+    <form action="/bus/submited" method="post" enctype="multipart/form-data">
+        <div class="bg-[#9ccdea] w-full h-[100vh] flex items-center justify-center text-center ">
+            <div class="h-auto w-[60%]  rounded-xl flex-row mt-[50px]" style="background: #fff;">
+                <div class="w-[100%] h-[16%] bg-emerald-600 rounded-xl pt-4 pb-4 font-bold text-2xl text-rose-50">
+                    Bus Enquiry System
+                </div>
+                <!-- bus type -->
+                <div class="p-[2%] row-1">
+                    <i class="material-icons scale-[1.5] m-6  text-green-500">directions_bus</i>
+                    <select name="bustype" id="bustype"
+                        class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                        <option value="">Choose Bus</option>
+                    </select>
+
+                </div>
+
+                <!-- Source -->
+                <div class="grid grid-cols-3 justify-items-stretch items-center pr-10">
+                    <div class="text-2xl">
+                        <font><b>Source></b></font>
+                    </div>
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">public</i>
+                        <select name="sstate" id="sstate"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select state</option>
+                        </select>
+                    </div>
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">location_city</i>
+                        <select name="scity" id="scity"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select city</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Destination -->
+                <div class="grid grid-cols-3 justify-items-stretch items-center pr-10 ">
+                    <div class="text-2xl pl-11">
+                        <font><b>Destination></b></font>
+                    </div>
+                    <div class="">
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">public</i>
+                        <select name="dstate" id="dstate"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select state</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">location_city</i>
+                        <select name="dcity" id="dcity"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                            <option value="">Select city</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Kilometer/rent -->
+                <div class="grid grid-cols-2 justify-items-stretch gap-5">
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">place</i>
+                        <input type="text" name="kilometer" id="kilometer" placeholder="Kilometer"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                    </div>
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">payment</i>
+                        <input type="text" name="rent" id="rent" placeholder="Rent"
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                    </div>
+                </div>
+                <!-- Day -->
+                <div class=" flex justify-center m-5">
+                    <div>
+                        <i class="material-icons scale-[1.5] mr-4  text-blue-500">today</i>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" name="day" id="day1" value="Sun.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day1">Sun.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" id="day2" name="day" value="Mon.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day2">Mon.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" id="day3" name="day" value="Tue.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day3">Tue.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" id="day4" name="day" value="Wed.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day4">Wed.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" id="day5" name="day" value="Thu.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day5">Thu.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" id="day6" name="day" value="Fri.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day6">Fri.</label>
+                    </div>
+                    <div class="form-check form-check-inline mr-4">
+                        <input
+                            class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+                            type="checkbox" id="day7" name="day" value="Sat.">
+                        <label class="form-check-label inline-block text-gray-800 font-bold" for="day7">Sat.</label>
+                    </div>
+
+                </div>
+
+                <!-- Busno. / Picture  -->
+                <div class="grid grid-cols-2 justify-items-stretch items-center gap-3">
+                    <div>
+                        <i class="material-icons scale-[1.5] m-6  text-blue-500">local_play</i>
+                        <input type="text" name="busnumber" id="busnumber" placeholder="Bus No."
+                            class="w-[60%] h-10 border-none hover:border-none bg-slate-100 rounded-lg hover:bg-green-400 font-bold">
+                    </div>
+                    <div class="">
+                        <input type="file" name="picture" id="picture" class="w-[50%] h-10 ">
+                    </div>
+                </div>
+
+                <!-- Submit button -->
+                <div class="grid grid-cols-2 justify-items-center gap-10 my-8">
+                    <div class="text-center text-white bg-green-600 rounded-2xl">
+                        <button class="h-10 w-40 text-xl pb-2 font-bold">Submit<i
+                                class="material-icons scale-[1] ml-5 text-2xl text-white">send</i></button>
+                    </div>
+                    <div class="text-center text-white bg-green-600 rounded-2xl">
+                        <input type="reset" name="reset" id="reset" value="Reset" class="h-10 w-40 text-xl font-bold">
+
+                    </div>
+
+                </div>
+                <div class="grid grid-cols-1 justify-items-center text-2xl">
+                    <span>
+                        <%=massage%>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background: linear-gradient(to right,rgb(241, 219, 51),rgb(58, 169, 234));
+
+    }
+</style>
+<body>
+    <div >
+        <div class="w-[1200px] h-[650px]   justify-center items-center ml-40 mt-12 rounded-xl" style="background-color: rgba(18, 19, 14, 0.4);border: 3px; border-color: beige;">
+            <div class=" flex m-3 ">  
+                <div class="w-[20%] h-full m-5 place-content-center justify-items-center mt-10">
+                    <div><img src="/images/46502c3f-11e0-418b-89f5-8ec4279a7a93.jpg" width="150px" class="rounded-full"></div>
+                    <br>
+                    <div class="text-white text-2xl "><b><%=admin.name%></b></div>
+                    <br>
+                    <button id="btnmenu" class=" bg-neutral-500 w-32 rounded-xl border-2 border-white text-2xl text-white font-bold flex hover:scale-110"><i class="material-icons text-3xl text-white font-bold">menu</i>Menu</button>
+                    <br>
+                    <div id="menu" style="display: none;">
+                        <ul  style="list-style-type:none">
+                            <li class="text-white text-xl font-bold cursor-pointer flex hover:bg-neutral-400 w-28 rounded-lg"><i class="material-icons text-3xl text-white font-bold">home</i><a href="http://localhost:3000/bus/bus_desbord">Home</a></li><br>
+                            <li class="text-white text-xl font-bold cursor-pointer flex hover:bg-neutral-400 w-36 rounded-lg"><i class="material-icons text-3xl text-white font-bold">playlist_add</i><a href="http://localhost:3000/bus/bus">Add Data</a></li><br>
+                            <li class="text-white text-xl font-bold cursor-pointer flex hover:bg-neutral-400 w-28 rounded-lg"><i class="material-icons text-3xl text-white font-bold">format_list_bulleted</i><a href="http://localhost:3000/bus/display_all_data">List</a></li><br>
+                            <li class="text-white text-xl font-bold cursor-pointer flex hover:bg-neutral-400 w-28 rounded-lg"><i class="material-icons text-3xl text-white font-bold">beenhere</i>About</li>
+                          </ul>
+                    </div>
+                    <br>
+                    <button id="btnmenu" class=" bg-neutral-500 w-32 rounded-xl border-2 border-white text-2xl text-white font-bold flex hover:scale-110"><i class="material-icons text-3xl text-white font-bold">perm_identity</i><a href="/login/adminlogout">Logout</a></button>
+                </div>
+                <div class="w-[80%] h-52   flex gap-7 mt-10" >
+                    <div class="w-60 h-40 back  rounded-2xl border-2 border-white shadow-gray-100 shadow-lg hover:scale-110 cursor-pointer text-center" style="background-image:url(/images/bus1.gif);background-size: cover;">
+                        <span class="text-2xl text-black font-bold font-serif">BUS MODAL-</span>
+                        <span class="text-4xl text-gray-700 font-bold"><%=result[0][0].counttypeid%></span>
+                    </div>
+                    <div class="w-60 h-40 bg-gradient-to-b from-orange-100 to-orange-400 rounded-2xl border-2 border-white shadow-gray-100 shadow-lg hover:scale-110 cursor-pointer text-center" style="background-image:url(/images/state.gif);background-size: cover;">
+                        <span class="text-2xl text-black font-bold font-serif">STATE-</span>
+                        <span class="text-4xl text-gray-700 font-bold"><%=result[1][0].countstate%></span>
+                    </div>
+                    <div class="w-60 h-40 bg-gradient-to-b from-orange-100 to-orange-400 rounded-2xl border-2 border-white shadow-gray-100 shadow-lg hover:scale-110 cursor-pointer text-center"
+                    style="background-image:url(/images/city1.gif);background-size: cover;">
+                        <span class="text-2xl text-black font-bold font-serif">CITY-</span>
+                        <span class="text-4xl text-gray-700 font-bold"><%=result[2][0].countcity%></span>
+            
+                    </div>
+                    <!-- <div class="w-60 h-40 bg-gradient-to-b from-orange-100 to-orange-400 rounded-2xl border-2 border-white shadow-gray-100 shadow-lg hover:scale-110 cursor-pointer">
+
+                    </div> -->
+                </div>
+                <!-- ////////////LIST DATA/////////////////// -->
+                <div class="w-[60%] h-96 bg-blue-200 border-2 border-white rounded-2xl flex absolute top-[38%] left-[25%] shadow-lg shadow-gray-100">
+                    <iframe src="http://localhost:3000/bus/display_all_data" class="h-[100%] w-[100%] absolute left-0 rounded-2xl" aria-disabled="true" scrolling="no" onload="disableContextMenu()" style="background-size: cover;"></iframe>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script>
+    $(document).ready(function(){
+        $('#btnmenu').click(function(){
+            $('#menu').toggle('show');
+        })
+    });
+</script>
+</html>
